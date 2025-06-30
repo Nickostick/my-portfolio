@@ -1,0 +1,295 @@
+/* 1. THEME VARIABLES */
+:root {
+    /* Dark Mode (Default) */
+    --primary-bg-color: #0c0c0c;
+    --primary-text-color: #FFFFFF;
+    --secondary-text-color: #b0b0b0;
+    --border-color: #333;
+    --border-accent-color: #FFFFFF;
+
+    /* Timing for smooth transition */
+    --theme-transition-duration: 0.3s;
+}
+
+body.light-mode {
+    /* Light Mode */
+    --primary-bg-color: #f0f0f0;
+    --primary-text-color: #000000;
+    --secondary-text-color: #555555;
+    --border-color: #cccccc;
+    --border-accent-color: #000000;
+}
+
+/* 2. BODY & GLOBAL STYLES */
+body {
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+    font-family: 'Mona Sans', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: background-color var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease;
+}
+
+/* Constrain the width for better readability */
+header, main, footer {
+    width: 100%;
+    max-width: 700px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 3. HEADER STYLES */
+header {
+    position: relative; 
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.profile-photo, header h1, header .scramble-text, .social-links {
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 20px auto;
+    border: 3px solid var(--border-accent-color);
+    object-fit: cover; /* UPDATED: This prevents the image from being squished */
+    transition: border-color var(--theme-transition-duration) ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 10px 0;
+}
+
+header p {
+    font-size: 1.2rem;
+    color: var(--secondary-text-color);
+}
+
+.scramble-text {
+    min-height: 1.2rem; 
+}
+
+.social-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--primary-text-color); 
+    transition: fill 0.3s ease;
+}
+
+.social-links a:hover .social-icon {
+    fill: var(--secondary-text-color);
+}
+
+
+/* 4. THEME TOGGLE STYLES */
+.theme-switch {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    display: flex; 
+    align-items: center;
+    gap: 8px; 
+    cursor: pointer;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.switch-track {
+    position: relative;
+    width: 50px;
+    height: 26px;
+}
+
+.slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--border-color);
+    border-radius: 26px;
+    transition: background-color var(--theme-transition-duration) ease;
+}
+
+.slider:before {
+    position: absolute;
+    content: ""; 
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform var(--theme-transition-duration) ease;
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px);
+}
+
+.theme-icon {
+    width: 16px;
+    height: 16px;
+    fill: var(--secondary-text-color);
+    transition: fill var(--theme-transition-duration) ease;
+}
+
+/* 5. MAIN CONTENT & ARTICLE STYLES */
+main {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    text-align: left;
+}
+
+article {
+    border-top: 1px solid var(--border-color);
+    padding: 40px 0;
+    transition: border-color var(--theme-transition-duration) ease;
+}
+
+article:first-child {
+    border-top: none; 
+}
+
+article h2 {
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.post-preview {
+    border-top: 1px solid var(--border-color);
+    padding: 40px 0;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.post-preview:first-child {
+    border-top: none;
+}
+.post-preview-title {
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+.post-preview-title a,
+.post-preview-title a:visited {
+    text-decoration: none;
+    color: var(--primary-text-color);
+    transition: color 0.3s ease;
+}
+.post-preview-title a:hover {
+    color: var(--secondary-text-color);
+}
+.post-preview-excerpt {
+    color: var(--secondary-text-color);
+    margin-bottom: 1rem;
+}
+.post-preview-link,
+.post-preview-link:visited {
+    display: inline-block;
+    font-weight: bold;
+    color: var(--primary-text-color);
+    text-decoration: none;
+}
+.post-preview-link:hover {
+    text-decoration: underline;
+}
+
+.post-body p {
+    margin-bottom: 1rem;
+}
+.post-body h3 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.post-body blockquote {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--border-accent-color);
+    color: var(--secondary-text-color);
+    font-style: italic;
+}
+.post-body ul, .post-body ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+}
+.post-body li {
+    margin-bottom: 0.5rem;
+}
+
+/* 6. FOOTER STYLES */
+footer {
+    padding-top: 40px;
+    padding-bottom: 60px;
+    border-top: 1px solid var(--border-color);
+    transition: border-color var(--theme-transition-duration) ease;
+}
+
+footer p {
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 300;
+    font-style: italic;
+}
+
+#entropy-trigger {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    line-height: 0;
+}
+.entropy-icon {
+    width: 20px;
+    height: 20px;
+    stroke: var(--primary-text-color);
+    transition: stroke 0.3s ease, transform 0.3s ease;
+}
+#entropy-trigger:hover .entropy-icon {
+    stroke: var(--secondary-text-color);
+    transform: rotate(90deg);
+}
+
+/* Header on post pages */
+.post-header {
+    text-align: left;
+    padding-bottom: 20px;
+}
+.back-link,
+.back-link:visited {
+    color: var(--secondary-text-color);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+.back-link:hover {
+    color: var(--primary-text-color);
+}
