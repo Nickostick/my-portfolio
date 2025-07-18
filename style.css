@@ -60,9 +60,8 @@ header {
     border-radius: 50%;
     display: block;
     margin: 0 auto 20px auto;
-    border: 3px solid var(--border-accent-color);
     object-fit: cover; /* UPDATED: This prevents the image from being squished */
-    transition: border-color var(--theme-transition-duration) ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 header h1 {
