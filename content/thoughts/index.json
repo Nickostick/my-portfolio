@@ -1,0 +1,18 @@
+{
+  "title": "Thoughts",
+  "description": "A collection of writings and ideas",
+  "posts": [
+    {
+      "slug": "hello-world",
+      "title": "Hello, World!",
+      "date": "2026-01-27",
+      "description": "Welcome to my corner of the internet."
+    },
+    {
+      "slug": "why-windows-98",
+      "title": "Why I Built a Windows 98 Portfolio",
+      "date": "2026-01-26",
+      "description": "Nostalgia, creativity, and standing out from the crowd."
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nicholas | Portfolio</title>
+  <meta name="description" content="A nostalgic Windows 98-style portfolio website">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nicholas | Portfolio">
+  <meta property="og:description" content="A nostalgic Windows 98-style portfolio website with draggable windows and retro aesthetics">
+  <meta property="og:image" content="assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nicholas | Portfolio">
+  <meta name="twitter:description" content="A nostalgic Windows 98-style portfolio website">
+
+  <!-- Favicon (Windows folder icon as SVG data URI) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path d='M4 12V40H44V16H24L20 12H4Z' fill='%23FFC400'/><path d='M4 12H20L24 16H44V40H4V12Z' stroke='%23996600'/></svg>">
+
+  <link rel="stylesheet" href="https://unpkg.com/98.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Boot Screen -->
+  <div id="boot-screen" role="status" aria-live="polite" aria-label="Loading portfolio">
+    <div class="boot-content">
+      <div class="boot-logo">Windows 98</div>
+      <p class="boot-text">Starting your portfolio...</p>
+      <div class="progress-indicator segmented boot-progress">
+        <div class="progress-indicator-bar" id="boot-progress-bar"></div>
+      </div>
+    </div>
+    <p class="boot-hint">Press any key to continue...</p>
+  </div>
+
+  <div id="desktop">
+    <div id="icon-grid"></div>
+    <div id="taskbar">
+      <!-- Start Button -->
+      <button id="start-button" aria-haspopup="true" aria-expanded="false">
+        <span class="start-logo" id="start-logo-container"></span>
+        <span class="start-text">Start</span>
+      </button>
+
+      <!-- Quick Launch Bar -->
+      <div id="quick-launch" role="toolbar" aria-label="Quick Launch">
+        <button class="quick-launch-btn" id="github-btn" aria-label="GitHub" title="GitHub"></button>
+        <button class="quick-launch-btn" id="twitter-btn" aria-label="X (Twitter)" title="X (Twitter)"></button>
+        <button class="quick-launch-btn" id="linkedin-btn" aria-label="LinkedIn" title="LinkedIn"></button>
+      </div>
+
+      <!-- Taskbar Divider -->
+      <div class="taskbar-divider"></div>
+
+      <!-- Open Windows -->
+      <div id="open-windows"></div>
+
+      <!-- System Tray -->
+      <div id="system-tray" role="toolbar" aria-label="System tray">
+        <span class="tray-icon" id="volume-icon" title="Volume"></span>
+        <span class="tray-icon" id="network-icon" title="Network"></span>
+      </div>
+
+      <!-- Clock -->
+      <div id="taskbar-clock" role="button" aria-label="Show fun facts" tabindex="0">
+        <span id="clock-time">12:00 PM</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Start Menu (hidden by default) -->
+  <div id="start-menu" class="popup-menu" hidden>
+    <div class="menu-item" data-action="about">
+      <span class="menu-icon">👤</span> About Me
+    </div>
+    <div class="menu-item" data-action="contact">
+      <span class="menu-icon">📧</span> Contact
+    </div>
+    <div class="menu-item" data-action="source">
+      <span class="menu-icon">💻</span> View Source
+    </div>
+    <div class="menu-divider"></div>
+    <div class="menu-item" data-action="shutdown">
+      <span class="menu-icon">🔌</span> Shut Down...
+    </div>
+  </div>
+
+  <!-- Fun Facts Popup (hidden by default) -->
+  <div id="fun-facts-popup" class="popup-menu" hidden>
+    <div class="fun-fact-content">
+      <span id="fun-fact-text">Loading fun fact...</span>
+    </div>
+  </div>
+
+  <!-- Mobile full-screen view -->
+  <div id="mobile-view">
+    <div id="mobile-header">
+      <button id="mobile-back-btn" aria-label="Go back">←</button>
+      <span id="mobile-title">Title</span>
+    </div>
+    <div id="mobile-content"></div>
+  </div>
+
+  <script src="https://unpkg.com/winbox/dist/winbox.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

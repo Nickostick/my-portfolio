@@ -1,0 +1,1527 @@
+/* Desktop Shell */
+#desktop {
+  height: 100vh;
+  background: #008080;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Icon Grid - left-aligned columns */
+#icon-grid {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 16px;
+  padding: 16px;
+  height: calc(100vh - 40px);
+}
+
+/* Individual Desktop Icon - Windows 98 style (no borders/boxes) */
+/* Override 98.css button styles completely */
+.desktop-icon,
+.desktop-icon:hover,
+.desktop-icon:focus,
+.desktop-icon:active,
+button.desktop-icon,
+button.desktop-icon:hover,
+button.desktop-icon:focus,
+button.desktop-icon:active {
+  width: 72px;
+  padding: 4px;
+  text-align: center;
+  cursor: pointer;
+  background: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  outline: none !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
+.desktop-icon svg {
+  width: 48px;
+  height: 48px;
+  display: block;
+  margin: 0 auto 4px;
+}
+
+.desktop-icon span {
+  color: white;
+  text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black;
+  font-size: 11px;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  display: block;
+  word-wrap: break-word;
+}
+
+/* Taskbar - Windows 98 raised top edge */
+#taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: #c0c0c0;
+  /* Raised top edge only */
+  border-top: 1px solid #ffffff;
+  box-shadow: inset 0 1px 0 #dfdfdf;
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+  gap: 4px;
+}
+
+/* Start Button - Windows 98 raised 3D button */
+#start-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: bold;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  background: #c0c0c0;
+  /* Windows 98 raised border */
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #000000;
+  border-right: 1px solid #000000;
+  box-shadow:
+    inset 1px 1px 0 #dfdfdf,
+    inset -1px -1px 0 #808080;
+  cursor: pointer;
+}
+
+#start-button:active,
+#start-button.active {
+  /* Pressed/inset state */
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-bottom: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  box-shadow:
+    inset 1px 1px 0 #808080,
+    inset -1px -1px 0 #dfdfdf;
+}
+
+.start-logo {
+  font-size: 14px;
+}
+
+#open-windows {
+  flex: 1;
+  display: flex;
+  gap: 4px;
+  overflow: hidden;
+}
+
+/* Clock - Windows 98 sunken/inset border */
+#taskbar-clock {
+  height: 22px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  background: #c0c0c0;
+  /* Windows 98 sunken border */
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-bottom: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  box-shadow: inset 1px 1px 0 #000000;
+  font-size: 11px;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  cursor: pointer;
+}
+
+/* Quick Launch Bar */
+#quick-launch {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 4px;
+  height: 22px;
+}
+
+.quick-launch-btn {
+  width: 22px;
+  height: 20px;
+  padding: 2px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quick-launch-btn:hover {
+  border: 1px solid #808080;
+  border-top-color: #dfdfdf;
+  border-left-color: #dfdfdf;
+  background: #dfdfdf;
+}
+
+.quick-launch-btn:active {
+  border: 1px solid #808080;
+  border-bottom-color: #dfdfdf;
+  border-right-color: #dfdfdf;
+  background: #c0c0c0;
+}
+
+.quick-launch-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Taskbar Divider */
+.taskbar-divider {
+  width: 2px;
+  height: 20px;
+  margin: 0 2px;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #ffffff;
+}
+
+/* System Tray - Windows 98 sunken/inset border */
+#system-tray {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px;
+  height: 22px;
+  background: #c0c0c0;
+  /* Windows 98 sunken border */
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-bottom: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  box-shadow: inset 1px 1px 0 #000000;
+  margin-right: 2px;
+}
+
+.tray-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.tray-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Start Button Logo (Windows Flag) */
+.start-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 14px;
+}
+
+.start-logo svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Popup Menus - Windows 98 raised 3D border */
+.popup-menu {
+  position: fixed;
+  bottom: 30px;
+  background: #c0c0c0;
+  /* Windows 98 raised border */
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #000000;
+  border-right: 1px solid #000000;
+  box-shadow:
+    inset 1px 1px 0 #dfdfdf,
+    inset -1px -1px 0 #808080,
+    2px 2px 0 rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  min-width: 150px;
+}
+
+#start-menu {
+  left: 2px;
+}
+
+#fun-facts-popup {
+  right: 2px;
+  padding: 8px 12px;
+  max-width: 200px;
+}
+
+.menu-item {
+  padding: 4px 20px 4px 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+}
+
+.menu-item:hover {
+  background: #000080;
+  color: white;
+}
+
+.menu-divider {
+  height: 1px;
+  background: #808080;
+  margin: 4px 2px;
+  border-bottom: 1px solid white;
+}
+
+.fun-fact-content {
+  font-size: 11px;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  line-height: 1.4;
+}
+
+/* Taskbar buttons for open windows - Windows 98 style */
+.taskbar-button {
+  height: 22px;
+  min-width: 120px;
+  max-width: 160px;
+  padding: 0 8px;
+  font-size: 11px;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: #c0c0c0;
+  /* Windows 98 raised border */
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #000000;
+  border-right: 1px solid #000000;
+  box-shadow:
+    inset 1px 1px 0 #dfdfdf,
+    inset -1px -1px 0 #808080;
+  cursor: pointer;
+}
+
+.taskbar-button:active,
+.taskbar-button.active {
+  /* Pressed/inset state */
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-bottom: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  box-shadow:
+    inset 1px 1px 0 #808080,
+    inset -1px -1px 0 #dfdfdf;
+  background: #c0c0c0;
+}
+
+/* Window content styles - Windows 98 gray background */
+.window-content {
+  padding: 16px;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  height: 100%;
+  overflow-y: auto;
+  background: #c0c0c0;
+}
+
+.window-content h1 {
+  font-size: 18px;
+  margin: 0 0 16px 0;
+}
+
+.window-content h2 {
+  font-size: 14px;
+  margin: 16px 0 8px 0;
+}
+
+.window-content p {
+  margin: 0 0 12px 0;
+}
+
+.window-content ul {
+  margin: 0 0 12px 0;
+  padding-left: 20px;
+}
+
+/* Thoughts window typography - larger for readability */
+.thoughts-content {
+  font-size: 16px;
+}
+
+.thoughts-content h1 {
+  font-size: 26px;
+}
+
+.thoughts-content h2 {
+  font-size: 21px;
+}
+
+.thoughts-content .post-list .post-item {
+  padding: 10px;
+}
+
+.thoughts-content .post-item .post-title {
+  font-size: 16px;
+}
+
+.thoughts-content .post-item .post-date {
+  font-size: 12px;
+}
+
+.thoughts-content .post-meta {
+  font-size: 14px;
+  color: #000;
+}
+
+.thoughts-content article p,
+.thoughts-content article li {
+  line-height: 1.6;
+}
+
+/* Blog post list */
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-item {
+  padding: 8px;
+  margin: 0 0 4px 0;
+  background: white;
+  /* Windows 98 sunken border for list items */
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-bottom: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  box-shadow: inset 1px 1px 0 #000000;
+  cursor: pointer;
+}
+
+.post-item:hover {
+  background: #000080;
+  color: white;
+}
+
+.post-item .post-title {
+  font-weight: bold;
+}
+
+.post-item .post-date {
+  font-size: 10px;
+  color: #808080;
+}
+
+.post-item:hover .post-date {
+  color: #c0c0c0;
+}
+
+/* Back button in window */
+.back-button {
+  margin-bottom: 12px;
+}
+
+/* Post article styles */
+.post-meta {
+  font-size: 11px;
+  color: #808080;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.post-meta .post-author {
+  margin-right: 12px;
+}
+
+.post-main-image {
+  max-width: 100%;
+  height: auto;
+  margin: 12px 0;
+  border: 2px solid #808080;
+}
+
+article img {
+  max-width: 100%;
+  height: auto;
+}
+
+article blockquote {
+  margin: 12px 0;
+  padding: 8px 12px;
+  background: #fffde7;
+  border-left: 3px solid #808080;
+  font-style: italic;
+}
+
+article code {
+  background: #c0c0c0;
+  padding: 1px 4px;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+}
+
+/* ==================== */
+/* AUTHENTIC MYSPACE STYLES */
+/* ==================== */
+
+.myspace-page {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  background: #b5c9df;
+  color: #000;
+  padding: 8px;
+  overflow-x: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.myspace-page a {
+  color: #003399;
+  text-decoration: underline;
+}
+
+.myspace-page a:hover {
+  color: #003399;
+}
+
+/* Two Column Layout */
+.myspace-layout {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.myspace-left {
+  width: 220px;
+  vertical-align: top;
+  padding-right: 8px;
+}
+
+.myspace-right {
+  vertical-align: top;
+  padding-left: 8px;
+  padding-top: 8px;
+  overflow: hidden;
+}
+
+/* Profile Name */
+.profile-name {
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 4px;
+  margin-top: 8px;
+  padding-left: 8px;
+}
+
+/* Profile Header Table (photo + info side by side) */
+.profile-header-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+}
+
+.profile-photo-cell {
+  vertical-align: top;
+  width: 110px;
+  padding-right: 8px;
+}
+
+.profile-info-cell {
+  vertical-align: top;
+}
+
+/* Profile Photo */
+.profile-photo {
+  width: 100px;
+  height: 130px;
+  object-fit: cover;
+  object-position: top;
+  border: 1px solid #000;
+  margin-top: 4px;
+}
+
+.profile-tagline {
+  color: #000;
+  margin-bottom: 8px;
+}
+
+/* Profile Details */
+.profile-details {
+  font-size: 12px;
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.last-login {
+  font-size: 12px;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.view-my {
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+/* Contacting Box */
+.contact-box {
+  border: 1px solid #b5c9df;
+  margin-bottom: 8px;
+  background: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.contact-header {
+  background: #ffcc99;
+  color: #333;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 4px 6px;
+  border-bottom: 1px solid #fc9;
+}
+
+.contact-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: #fff;
+}
+
+.contact-table td {
+  padding: 4px 6px;
+  font-size: 12px;
+  font-weight: 500;
+  border-bottom: 1px solid #ccc;
+  width: 50%;
+}
+
+.contact-link {
+  color: #003399;
+  text-decoration: none;
+  display: block;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+.contact-icon {
+  font-size: 12px;
+  margin-right: 2px;
+}
+
+/* MySpace URL Box */
+.url-box {
+  border: 1px solid #b5c9df;
+  background: #fff;
+  margin-bottom: 8px;
+}
+
+.url-header {
+  background: #ffcc99;
+  color: #333;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 4px 6px;
+}
+
+.url-content {
+  padding: 4px 6px;
+  font-size: 12px;
+  word-break: break-all;
+}
+
+/* Network Box */
+.network-box {
+  background: #fff;
+  border: 1px solid #b5c9df;
+  padding: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.network-img {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ccc;
+}
+
+.network-text {
+  font-size: 12px;
+  color: #333;
+}
+
+/* Blog Section */
+.blog-section {
+  margin-bottom: 16px;
+}
+
+.blog-header {
+  font-size: 12px;
+  font-weight: bold;
+  color: #ff6600;
+  margin-bottom: 8px;
+}
+
+.blog-subscribe {
+  font-weight: normal;
+  color: #003399;
+}
+
+.blog-links {
+  margin-left: 12px;
+  margin-bottom: 8px;
+}
+
+.blog-entry {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.view-more {
+  color: #003399;
+}
+
+.view-all {
+  font-size: 12px;
+  margin-left: 12px;
+}
+
+/* Blurbs Box */
+.blurbs-box {
+  border: 1px solid #b5c9df;
+  margin-bottom: 12px;
+  background: #fff;
+  overflow: hidden;
+  display: block;
+  box-sizing: border-box;
+}
+
+.blurbs-header {
+  background: #ffcc99;
+  color: #ff6600;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 6px 10px;
+}
+
+.blurbs-content {
+  padding: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.blurb-title {
+  color: #ff6600;
+  font-weight: bold;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.blurbs-content p {
+  margin: 0 0 12px 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Interests Box */
+.interests-box {
+  border: 1px solid #b5c9df;
+  margin-bottom: 8px;
+  background: #fff;
+}
+
+.interests-header {
+  background: #ffcc99;
+  color: #ff6600;
+  font-weight: bold;
+  font-size: 11px;
+  padding: 4px 6px;
+}
+
+.interests-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.interests-table td {
+  padding: 4px 6px;
+  font-size: 10px;
+  border-bottom: 1px solid #ccc;
+  vertical-align: top;
+}
+
+.interest-label {
+  background: #b5c9df;
+  color: #000;
+  font-weight: bold;
+  width: 80px;
+}
+
+.interest-value {
+  background: #fff;
+}
+
+/* Details Box */
+.details-box {
+  border: 1px solid #b5c9df;
+  margin-bottom: 8px;
+  background: #fff;
+}
+
+.details-header {
+  background: #ffcc99;
+  color: #ff6600;
+  font-weight: bold;
+  font-size: 11px;
+  padding: 4px 6px;
+}
+
+.details-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.details-table td {
+  padding: 4px 6px;
+  font-size: 10px;
+  border-bottom: 1px solid #ccc;
+  vertical-align: top;
+}
+
+.detail-label {
+  background: #b5c9df;
+  color: #000;
+  font-weight: bold;
+  width: 100px;
+}
+
+.detail-value {
+  background: #fff;
+}
+
+/* Mobile Full-Screen View */
+#mobile-view {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #c0c0c0;
+  z-index: 9999;
+  flex-direction: column;
+}
+
+#mobile-view.active {
+  display: flex;
+}
+
+#mobile-header {
+  height: 44px;
+  min-height: 44px;
+  background: #000080;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 12px;
+  border-bottom: 2px solid #000040;
+}
+
+#mobile-back-btn {
+  width: 44px;
+  height: 36px;
+  background: #c0c0c0;
+  /* Windows 98 raised border */
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #000000;
+  border-right: 1px solid #000000;
+  box-shadow:
+    inset 1px 1px 0 #dfdfdf,
+    inset -1px -1px 0 #808080;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#mobile-back-btn:active {
+  /* Pressed/inset state */
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-bottom: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  box-shadow:
+    inset 1px 1px 0 #808080,
+    inset -1px -1px 0 #dfdfdf;
+}
+
+#mobile-title {
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+}
+
+#mobile-content {
+  flex: 1;
+  overflow-y: auto;
+  background: white;
+  -webkit-overflow-scrolling: touch;
+}
+
+#mobile-content .window-content {
+  padding: 16px;
+  min-height: 100%;
+  height: auto;
+  overflow-y: visible;
+}
+
+#mobile-content .myspace-page {
+  overflow-x: visible;
+  overflow-y: visible;
+}
+
+/* Boot Screen */
+#boot-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  animation: fadeIn 0.3s ease;
+}
+
+#boot-screen.hidden {
+  animation: fadeOut 0.3s ease forwards;
+  pointer-events: none;
+}
+
+#boot-screen.instant-hide {
+  display: none;
+}
+
+.boot-content {
+  text-align: center;
+}
+
+.boot-logo {
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.boot-text {
+  color: #c0c0c0;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  font-size: 14px;
+  margin: 0 0 24px 0;
+}
+
+.boot-progress {
+  width: 300px;
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.boot-progress .progress-indicator-bar {
+  width: 0%;
+  animation: bootProgress 4s steps(20) forwards;
+}
+
+@keyframes bootProgress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.boot-hint {
+  position: absolute;
+  bottom: 40px;
+  color: #808080;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  font-size: 11px;
+  margin: 0;
+}
+
+/* Game Loading Screen */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+}
+
+.loading-overlay.fade-out {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.loading-dialog {
+  width: 320px;
+  max-width: 90vw;
+}
+
+.loading-body {
+  padding: 20px;
+  text-align: center;
+}
+
+.loading-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+}
+
+.loading-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.loading-text {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 0 8px;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+}
+
+.loading-subtext {
+  font-size: 11px;
+  color: #808080;
+  margin: 0 0 16px;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+}
+
+.loading-progress {
+  height: 20px;
+  background: white;
+  /* Windows 98 sunken border */
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-bottom: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  box-shadow: inset 1px 1px 0 #000000;
+  margin-bottom: 12px;
+}
+
+.loading-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #000080 0%, #1084d0 50%, #000080 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1s linear infinite;
+  transition: width 0.2s ease;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.loading-tip {
+  font-size: 10px;
+  color: #808080;
+  font-style: italic;
+  margin: 0;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+}
+
+/* RCT Video Window */
+.rct-video-container {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.rct-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* LimeWire Easter Egg - Virus Error Windows */
+.virus-error-window {
+  position: fixed;
+  z-index: 10000;
+  min-width: 250px;
+  max-width: 350px;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  animation: virusPopIn 0.15s ease-out;
+}
+
+@keyframes virusPopIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* BSOD Overlay */
+.bsod-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #000080;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: bsodIn 0.1s ease-out;
+}
+
+@keyframes bsodIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.bsod-overlay.bsod-fade-out {
+  animation: fadeOut 0.5s ease forwards;
+}
+
+.bsod-text {
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+  white-space: pre;
+  padding: 40px;
+}
+
+/* Mobile LimeWire - Phone Takeover */
+.mobile-virus-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.mobile-virus-warning {
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  color: #00ff00;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-virus-warning.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.mobile-virus-icon {
+  margin-right: 6px;
+}
+
+.mobile-virus-flash {
+  background: white !important;
+}
+
+.mobile-virus-crash {
+  background: black;
+  justify-content: flex-start;
+  padding-top: 40px;
+  gap: 2px;
+}
+
+.mobile-crash-line {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  color: #aaa;
+  line-height: 1.6;
+  min-height: 1em;
+}
+
+.mobile-virus-reboot {
+  animation: fadeOut 0.5s ease forwards;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  #boot-screen {
+    animation: none;
+  }
+
+  #boot-screen.hidden {
+    animation: none;
+    opacity: 0;
+  }
+
+  .boot-progress .progress-indicator-bar {
+    animation: none;
+    width: 100%;
+  }
+
+  .loading-overlay {
+    animation: none;
+  }
+
+  .loading-overlay.fade-out {
+    animation: none;
+    opacity: 0;
+  }
+
+  .loading-progress-bar {
+    animation: none;
+    background: #000080;
+  }
+
+  .desktop-icon {
+    transition: none;
+  }
+}
+
+/* ===========================================
+   WINDOWS 98 AUTHENTIC BORDER SYSTEM
+
+   Raised (outset) borders: windows, buttons
+   - Top/Left outer: #FFFFFF (white)
+   - Top/Left inner: #DFDFDF (light gray)
+   - Bottom/Right inner: #808080 (dark gray)
+   - Bottom/Right outer: #000000 (black)
+
+   Sunken (inset) borders: text fields, content areas
+   - Top/Left outer: #808080 (dark gray)
+   - Top/Left inner: #000000 (black) [optional]
+   - Bottom/Right inner: #DFDFDF (light gray) [optional]
+   - Bottom/Right outer: #FFFFFF (white)
+   =========================================== */
+
+/* WinBox Window Frame - Windows 98 Raised Border */
+.winbox {
+  background: #c0c0c0 !important;
+  /* Classic Windows 98 raised 3D border */
+  border-top: 2px solid #dfdfdf !important;
+  border-left: 2px solid #dfdfdf !important;
+  border-bottom: 2px solid #404040 !important;
+  border-right: 2px solid #404040 !important;
+  /* Outer highlight and shadow + drop shadow */
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #808080,
+    1px 1px 0 #000000 !important;
+  /* Clip any overflow from title bar */
+  overflow: hidden !important;
+}
+
+/* WinBox body - Windows 98 gray background with INSET content border */
+.winbox .wb-body {
+  background: #c0c0c0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  /* Sunken/inset border using actual borders - cleaner than box-shadow */
+  border-top: 2px solid #808080 !important;
+  border-left: 2px solid #808080 !important;
+  border-bottom: 2px solid #dfdfdf !important;
+  border-right: 2px solid #dfdfdf !important;
+}
+
+/* Title bar - Windows 98 blue gradient */
+.winbox .wb-header {
+  background: linear-gradient(90deg, #000080 0%, #1084d0 100%) !important;
+  height: 22px !important;
+  min-height: 22px !important;
+  padding: 2px 2px 2px 4px !important;
+  /* Override WinBox's width: 100% so left/right positioning works */
+  width: auto !important;
+  right: 2px !important;
+  left: 2px !important;
+  top: 2px !important;
+}
+
+/* Inactive window title bar - gray gradient */
+.winbox.min .wb-header,
+.winbox:not(.focus) .wb-header {
+  background: linear-gradient(90deg, #808080 0%, #b5b5b5 100%) !important;
+}
+
+.winbox .wb-title {
+  font-weight: bold;
+  color: white;
+  text-shadow: none;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  font-size: 11px;
+  /* Match header content height (22px) for vertical centering */
+  line-height: 22px !important;
+}
+
+.winbox .wb-icon {
+  width: 16px;
+  height: 16px;
+  /* Center vertically in 22px header: (22-16)/2 = 3px top/bottom */
+  margin: 3px 4px 3px 0 !important;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Window control buttons - Windows 98 style */
+.winbox .wb-min,
+.winbox .wb-max,
+.winbox .wb-full,
+.winbox .wb-close {
+  width: 16px !important;
+  height: 14px !important;
+  margin: 2px 0 2px 2px !important;
+  background-color: #c0c0c0 !important;
+  /* Raised 3D border */
+  border-top: 1px solid #ffffff !important;
+  border-left: 1px solid #ffffff !important;
+  border-bottom: 1px solid #000000 !important;
+  border-right: 1px solid #000000 !important;
+  box-shadow:
+    inset 1px 1px 0 #dfdfdf,
+    inset -1px -1px 0 #808080 !important;
+  /* Make icons black by inverting the white WinBox icons */
+  filter: none !important;
+  background-size: 10px 10px !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Override WinBox default white icons with black versions */
+.winbox .wb-min {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect x='1' y='7' width='8' height='2' fill='%23000'/%3E%3C/svg%3E") !important;
+}
+
+.winbox .wb-max {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect x='1' y='1' width='8' height='8' fill='none' stroke='%23000' stroke-width='1'/%3E%3Crect x='1' y='1' width='8' height='2' fill='%23000'/%3E%3C/svg%3E") !important;
+}
+
+.winbox .wb-full {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect x='0' y='3' width='7' height='6' fill='none' stroke='%23000' stroke-width='1'/%3E%3Crect x='0' y='3' width='7' height='2' fill='%23000'/%3E%3Crect x='3' y='0' width='7' height='6' fill='none' stroke='%23000' stroke-width='1'/%3E%3Crect x='3' y='0' width='7' height='2' fill='%23000'/%3E%3Crect x='3' y='0' width='4' height='3' fill='%23c0c0c0'/%3E%3Crect x='3' y='0' width='7' height='2' fill='%23000'/%3E%3C/svg%3E") !important;
+}
+
+.winbox .wb-close {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1,1 L9,9 M9,1 L1,9' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") !important;
+  margin-right: 4px !important;
+}
+
+.winbox .wb-min:hover,
+.winbox .wb-max:hover,
+.winbox .wb-full:hover,
+.winbox .wb-close:hover {
+  background-color: #d4d4d4 !important;
+}
+
+.winbox .wb-min:active,
+.winbox .wb-max:active,
+.winbox .wb-full:active,
+.winbox .wb-close:active {
+  /* Pressed/inset state */
+  border-top: 1px solid #000000 !important;
+  border-left: 1px solid #000000 !important;
+  border-bottom: 1px solid #ffffff !important;
+  border-right: 1px solid #ffffff !important;
+  box-shadow:
+    inset 1px 1px 0 #808080,
+    inset -1px -1px 0 #dfdfdf !important;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  #icon-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    height: auto;
+    padding: 24px 16px;
+    gap: 20px;
+  }
+
+  .desktop-icon {
+    width: 72px;
+    min-height: 72px;
+    padding: 8px;
+  }
+
+  .desktop-icon svg {
+    width: 44px;
+    height: 44px;
+  }
+
+  .desktop-icon span {
+    font-size: 10px;
+    margin-top: 4px;
+  }
+
+  #taskbar {
+    display: none;
+  }
+
+  /* Hide WinBox windows on mobile - use mobile view instead */
+  .winbox {
+    display: none !important;
+  }
+
+  /* Larger touch targets for post items */
+  .post-item {
+    padding: 14px 12px;
+    margin-bottom: 8px;
+  }
+
+  .post-item .post-title {
+    font-size: 14px;
+  }
+
+  .post-item .post-date {
+    font-size: 11px;
+    margin-top: 4px;
+  }
+
+  /* Better mobile content sizing */
+  .window-content h1 {
+    font-size: 20px;
+  }
+
+  .window-content h2 {
+    font-size: 16px;
+  }
+
+  .window-content {
+    font-size: 14px;
+  }
+
+  /* MySpace mobile adjustments */
+  .myspace-layout {
+    display: block;
+    width: 100% !important;
+  }
+
+  .myspace-layout > tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .myspace-layout > tbody > tr {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Unwrap td containers so children become flex items for reordering */
+  .myspace-left,
+  .myspace-right {
+    display: contents;
+  }
+
+  /* Mobile order: profile(1) → blog(2) → blurbs(3) → contact(4) → url(5) */
+  .profile-name { order: 1; }
+  .profile-header-table { order: 2; }
+  .view-my { order: 3; }
+  .blog-section { order: 4; }
+  .blurbs-box { order: 5; }
+  .contact-box { order: 6; }
+  .url-box { order: 7; }
+
+  /* Profile header: photo + info side-by-side, photo gets fixed width */
+  .profile-header-table {
+    display: table !important;
+    table-layout: fixed !important;
+    width: 100% !important;
+    margin-bottom: 8px;
+  }
+
+  .profile-photo-cell {
+    width: 115px !important;
+    padding-right: 8px;
+  }
+
+  .profile-photo {
+    width: 100px;
+    height: auto;
+    max-height: 140px;
+  }
+
+  .profile-info-cell {
+    vertical-align: top;
+  }
+
+  .contact-table,
+  .contact-table tbody,
+  .contact-table tr,
+  .contact-table td {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* Spacing for reordered sections */
+  .blog-section,
+  .blurbs-box,
+  .contact-box,
+  .url-box {
+    margin-top: 12px;
+  }
+
+  /* Align View My and Blog header with blurbs content (12px padding) */
+  .view-my {
+    padding-left: 4px;
+  }
+
+  .blog-header {
+    padding-left: 4px;
+  }
+}
