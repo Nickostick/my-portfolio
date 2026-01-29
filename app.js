@@ -1239,10 +1239,10 @@ function handleStartMenuAction(action) {
       if (aboutIcon) handleIconClick(aboutIcon);
       break;
     case 'contact':
-      window.location.href = 'mailto:hello@example.com';
+      // Contact links handled via social profiles
       break;
     case 'source':
-      window.open('https://github.com/Nickostick/windows97-portfolio', '_blank', 'noopener');
+      window.open('https://github.com/Nickostick/my-portfolio', '_blank', 'noopener');
       break;
     case 'shutdown':
       alert('Thanks for visiting! 👋');
