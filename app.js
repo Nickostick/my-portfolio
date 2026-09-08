@@ -43,16 +43,6 @@ const svgIcons = {
     <line x1="14" y1="32" x2="30" y2="32" stroke="#808080" stroke-width="1"/>
   </svg>`,
 
-  workouts: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="4" y="20" width="8" height="8" fill="#808080"/>
-    <rect x="36" y="20" width="8" height="8" fill="#808080"/>
-    <rect x="12" y="16" width="4" height="16" fill="#404040"/>
-    <rect x="32" y="16" width="4" height="16" fill="#404040"/>
-    <rect x="16" y="22" width="16" height="4" fill="#606060"/>
-    <rect x="6" y="22" width="4" height="4" fill="#606060"/>
-    <rect x="38" y="22" width="4" height="4" fill="#606060"/>
-  </svg>`,
-
   // RollerCoaster Tycoon inspired icon (roller coaster track)
   rct: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="4" y="4" width="40" height="40" rx="4" fill="#2E7D32"/>
@@ -121,7 +111,6 @@ const svgIcons = {
 // PNG icon mapping for authentic Windows 98 icons
 const pngIcons = {
   thoughts: 'assets/icons/windows98-icons/png/notepad-0.png',
-  workouts: 'assets/icons/windows98-icons/png/calendar-0.png',
   myspace: 'assets/icons/windows98-icons/png/user_card.png',
   rct: 'assets/icons/RCT.ico',
   limewire: 'assets/icons/LimeWire.jpeg',
@@ -133,7 +122,6 @@ const pngIcons = {
 // Icon configuration
 const icons = [
   { id: 'thoughts', type: 'folder', label: 'Thoughts', icon: 'thoughts' },
-  { id: 'workouts', type: 'folder', label: 'Workouts', icon: 'workouts' },
   { id: 'myspace', type: 'folder', label: 'MySpace', icon: 'myspace' },
   { id: 'rct', type: 'video-game', label: 'RollerCoaster Tycoon', icon: 'rct' },
   { id: 'limewire', type: 'easter-egg', label: 'LimeWire', icon: 'limewire' },
@@ -653,9 +641,6 @@ async function loadMobileContent(container, id) {
     case 'thoughts':
       await loadThoughtsContent(container, true);
       break;
-    case 'workouts':
-      loadWorkoutsContent(container);
-      break;
     case 'myspace':
       await loadMyspaceContent(container);
       break;
@@ -755,9 +740,6 @@ async function loadWindowContent(win, id) {
   switch (id) {
     case 'thoughts':
       await loadThoughtsContent(contentEl);
-      break;
-    case 'workouts':
-      loadWorkoutsContent(contentEl);
       break;
     case 'myspace':
       await loadMyspaceContent(contentEl);
@@ -937,18 +919,6 @@ function goBackToList(btn) {
   window.location.hash = '';
 }
 
-// Workouts content (placeholder)
-function loadWorkoutsContent(container) {
-  container.innerHTML = `
-    <h1>Workouts</h1>
-    <p>Tracking my fitness journey.</p>
-    <div class="resume-section">
-      <h2>Recent Activity</h2>
-      <p><em>Workout logs coming soon...</em></p>
-    </div>
-  `;
-}
-
 // MySpace profile content
 async function loadMyspaceContent(container) {
   try {
@@ -1022,17 +992,8 @@ function handleHashChange() {
       }
       setTimeout(() => {
         const container = document.querySelector('#mobile-content .window-content');
-        if (container && cachedPosts) {
+        if (container) {
           loadPost(container, slug, cachedPosts, true);
-        } else {
-          fetch('content/thoughts/index.json')
-            .then(r => r.json())
-            .then(data => {
-              cachedPosts = data.posts;
-              if (container) {
-                loadPost(container, slug, data.posts, true);
-              }
-            });
         }
       }, 100);
     } else {
@@ -1043,14 +1004,10 @@ function handleHashChange() {
       setTimeout(() => {
         const win = openWindows.get('thoughts');
         if (win) {
-          fetch('content/thoughts/index.json')
-            .then(r => r.json())
-            .then(data => {
-              const container = win.body.querySelector('.window-content');
-              if (container) {
-                loadPost(container, slug, data.posts, false);
-              }
-            });
+          const container = win.body.querySelector('.window-content');
+          if (container) {
+            loadPost(container, slug, cachedPosts, false);
+          }
         }
       }, 100);
     }
