@@ -125,6 +125,8 @@ const icons = [
   { id: 'myspace', type: 'folder', label: 'MySpace', icon: 'myspace' },
   { id: 'rct', type: 'video-game', label: 'RollerCoaster Tycoon', icon: 'rct' },
   { id: 'limewire', type: 'easter-egg', label: 'LimeWire', icon: 'limewire' },
+  { id: 'linkedin', type: 'social', label: 'LinkedIn', icon: 'linkedin', url: 'https://www.linkedin.com/in/nicholasprijic/', shortcut: true },
+  { id: 'twitter', type: 'social', label: 'X', icon: 'twitter', url: 'https://x.com/NickPrijic', shortcut: true },
 ];
 
 // State
@@ -1026,10 +1028,13 @@ function initIcons() {
     el.setAttribute('role', 'listitem');
     el.setAttribute('aria-label', getIconAriaLabel(icon));
     // Use PNG icons if available, fallback to SVG
-    const iconHtml = pngIcons[icon.icon]
+    // Shortcuts use the brand SVG plus the Win98 shortcut arrow overlay
+    const iconHtml = (pngIcons[icon.icon] && !icon.shortcut)
       ? `<img src="${pngIcons[icon.icon]}" alt="${icon.label}" style="width: 32px; height: 32px;">`
       : svgIcons[icon.icon];
-    el.innerHTML = `${iconHtml}<span>${icon.label}</span>`;
+    if (icon.shortcut) el.classList.add('shortcut');
+    const arrow = icon.shortcut ? '<i class="shortcut-arrow" aria-hidden="true"></i>' : '';
+    el.innerHTML = `<span class="icon-img">${iconHtml}${arrow}</span><span>${icon.label}</span>`;
     el.onclick = () => handleIconClick(icon);
     el.title = icon.label;
     grid.appendChild(el);
@@ -1197,6 +1202,12 @@ function handleStartMenuAction(action) {
       break;
     case 'contact':
       // Contact links handled via social profiles
+      break;
+    case 'x':
+      window.open('https://x.com/NickPrijic', '_blank', 'noopener');
+      break;
+    case 'linkedin':
+      window.open('https://www.linkedin.com/in/nicholasprijic/', '_blank', 'noopener');
       break;
     case 'source':
       window.open('https://github.com/Nickostick/my-portfolio', '_blank', 'noopener');

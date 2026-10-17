@@ -60,6 +60,26 @@ button.desktop-icon:active {
   word-wrap: break-word;
 }
 
+/* Icon image wrapper (holds optional shortcut arrow) */
+.desktop-icon .icon-img {
+  display: inline-block;
+  position: relative;
+  text-shadow: none;
+  margin: 0;
+}
+
+/* Win98 shortcut arrow overlay, bottom-left of the icon */
+.desktop-icon .shortcut-arrow {
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 11px;
+  height: 11px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 11'%3E%3Cpath d='M3 9 L3 6 Q3 4 5 4 L6 4 L6 2 L9 5 L6 8 L6 6 L5 6 Q5 6 5 9 Z' fill='%23000'/%3E%3C/svg%3E") center / 11px 11px no-repeat;
+  border: 1px solid #000;
+  box-sizing: content-box;
+}
+
 /* Taskbar - Windows 98 raised top edge */
 #taskbar {
   position: fixed;
@@ -862,7 +882,7 @@ article code {
 #mobile-back-btn {
   width: 44px;
   height: 36px;
-  background: #c0c0c0;
+  background-color: #c0c0c0;
   /* Windows 98 raised border */
   border-top: 1px solid #ffffff;
   border-left: 1px solid #ffffff;
@@ -1408,8 +1428,84 @@ article code {
     margin-top: 4px;
   }
 
+  /* Win98 taskbar stays on phones: Start + clock, 44px tap height */
   #taskbar {
+    height: 44px;
+    z-index: 10000;
+    padding: 2px 4px calc(2px + env(safe-area-inset-bottom));
+    box-sizing: content-box;
+  }
+
+  #quick-launch,
+  .taskbar-divider,
+  #system-tray {
     display: none;
+  }
+
+  #start-button,
+  #taskbar-clock {
+    height: 40px;
+    min-height: 44px;
+    min-width: 44px;
+    box-sizing: border-box;
+    font-size: 13px;
+    padding: 0 10px;
+  }
+
+  .popup-menu {
+    bottom: calc(48px + env(safe-area-inset-bottom));
+    z-index: 10001;
+  }
+
+  .menu-item {
+    min-height: 44px;
+    font-size: 14px;
+    padding: 0 24px 0 12px;
+  }
+
+  #icon-grid {
+    height: calc(100vh - 48px);
+  }
+
+  /* Mobile view as a maximized Win98 window above the taskbar */
+  #mobile-view {
+    bottom: calc(48px + env(safe-area-inset-bottom));
+    padding: 3px;
+    box-sizing: border-box;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf,
+      inset -2px -2px #808080, inset 2px 2px #fff;
+  }
+
+  #mobile-view #mobile-header {
+    height: 50px;
+    min-height: 50px;
+    padding: 0 3px 0 6px;
+    border-bottom: none;
+    gap: 6px;
+    background: linear-gradient(90deg, #000080, #1084d0);
+  }
+
+  #mobile-view #mobile-title {
+    font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  /* Beveled close button, enlarged to a 44px tap target */
+  .title-bar-controls #mobile-back-btn {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px 14px;
+    font-size: 0;
+  }
+
+  #mobile-content {
+    margin-top: 2px;
+    box-shadow: inset -1px -1px #fff, inset 1px 1px #808080;
   }
 
   /* Hide WinBox windows on mobile - use mobile view instead */
