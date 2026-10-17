@@ -1526,6 +1526,37 @@ article code {
     box-shadow: inset -1px -1px #fff, inset 1px 1px #808080;
   }
 
+  /* Video windows (RCT, StarCraft): size the window to the video, not the
+     screen. Full width minus a margin, height = title bar + video at its own
+     aspect ratio, centered vertically above the taskbar. */
+  #mobile-view.video-mode {
+    top: calc((100vh - 48px - env(safe-area-inset-bottom)) / 2);
+    bottom: auto;
+    left: 8px;
+    right: 8px;
+    transform: translateY(-50%);
+    max-height: calc(100vh - 48px - env(safe-area-inset-bottom) - 16px);
+  }
+
+  #mobile-view.video-mode #mobile-content {
+    flex: 0 0 auto;
+    overflow: hidden;
+    background: #000;
+  }
+
+  #mobile-view.video-mode .rct-video-container {
+    padding: 0;
+    height: auto;
+    min-height: 0;
+    display: block;
+  }
+
+  #mobile-view.video-mode .rct-video {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
   /* Hide WinBox windows on mobile - use mobile view instead */
   .winbox {
     display: none !important;

@@ -326,7 +326,7 @@ function openRCTMobileView(icon) {
     </div>
   `;
 
-  mobileView.classList.add('active');
+  mobileView.classList.add('active', 'video-mode');
 
   const video = mobileContent.querySelector('video');
   startVideoFromTap(video, mobileContent.querySelector('.rct-video-container'));
@@ -645,6 +645,7 @@ function openMobileView(icon) {
   contentEl.className = 'window-content';
   mobileContent.innerHTML = '';
   mobileContent.appendChild(contentEl);
+  mobileView.classList.remove('video-mode');
 
   // Load content
   loadMobileContent(contentEl, icon.id);
@@ -662,7 +663,7 @@ function closeMobileView() {
     video.removeAttribute('src');
     video.load();
   }
-  mobileView.classList.remove('active');
+  mobileView.classList.remove('active', 'video-mode');
   currentMobileView = null;
   window.location.hash = '';
 }
