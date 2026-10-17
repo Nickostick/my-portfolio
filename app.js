@@ -56,6 +56,46 @@ const svgIcons = {
     <rect x="34" y="24" width="4" height="16" fill="#795548"/>
   </svg>`,
 
+  // StarCraft icon: pixel art of the 1998 main menu (planet, star, green cursor)
+  starcraft: `<svg viewBox="0 0 16 16" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="16" height="16" fill="#05050f"/>
+    <rect x="2" y="1" width="1" height="1" fill="#ffffff"/>
+    <rect x="12" y="1" width="1" height="1" fill="#ffffff"/>
+    <rect x="7" y="2" width="2" height="1" fill="#8b1a1a"/>
+    <rect x="6" y="3" width="1" height="1" fill="#8b1a1a"/>
+    <rect x="7" y="3" width="1" height="1" fill="#ff9a2e"/>
+    <rect x="8" y="3" width="1" height="1" fill="#8b1a1a"/>
+    <rect x="14" y="3" width="1" height="1" fill="#ffffff"/>
+    <rect x="1" y="4" width="1" height="1" fill="#ffffff"/>
+    <rect x="7" y="4" width="2" height="1" fill="#8b1a1a"/>
+    <rect x="5" y="6" width="1" height="1" fill="#3cd04a"/>
+    <rect x="5" y="7" width="2" height="1" fill="#3cd04a"/>
+    <rect x="11" y="7" width="1" height="1" fill="#ffffff"/>
+    <rect x="5" y="8" width="1" height="1" fill="#3cd04a"/>
+    <rect x="6" y="8" width="1" height="1" fill="#0f4d14"/>
+    <rect x="7" y="8" width="1" height="1" fill="#3cd04a"/>
+    <rect x="5" y="9" width="1" height="1" fill="#3cd04a"/>
+    <rect x="6" y="9" width="2" height="1" fill="#0f4d14"/>
+    <rect x="8" y="9" width="1" height="1" fill="#3cd04a"/>
+    <rect x="5" y="10" width="1" height="1" fill="#3cd04a"/>
+    <rect x="6" y="10" width="1" height="1" fill="#0f4d14"/>
+    <rect x="7" y="10" width="3" height="1" fill="#3cd04a"/>
+    <rect x="2" y="11" width="3" height="1" fill="#1d4f9c"/>
+    <rect x="5" y="11" width="2" height="1" fill="#3cd04a"/>
+    <rect x="1" y="12" width="2" height="1" fill="#1d4f9c"/>
+    <rect x="3" y="12" width="2" height="1" fill="#6fa8e8"/>
+    <rect x="5" y="12" width="1" height="1" fill="#1d4f9c"/>
+    <rect x="6" y="12" width="1" height="1" fill="#3cd04a"/>
+    <rect x="0" y="13" width="2" height="1" fill="#1d4f9c"/>
+    <rect x="2" y="13" width="2" height="1" fill="#6fa8e8"/>
+    <rect x="4" y="13" width="5" height="1" fill="#1d4f9c"/>
+    <rect x="0" y="14" width="1" height="1" fill="#1d4f9c"/>
+    <rect x="1" y="14" width="2" height="1" fill="#6fa8e8"/>
+    <rect x="3" y="14" width="9" height="1" fill="#1d4f9c"/>
+    <rect x="0" y="15" width="1" height="1" fill="#6fa8e8"/>
+    <rect x="1" y="15" width="14" height="1" fill="#1d4f9c"/>
+  </svg>`,
+
   // Windows 98 4-color flag logo for Start button
   windowsLogo: `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="1" y="1" width="6" height="6" fill="#FF0000"/>
@@ -123,7 +163,8 @@ const pngIcons = {
 const icons = [
   { id: 'thoughts', type: 'folder', label: 'Thoughts', icon: 'thoughts' },
   { id: 'myspace', type: 'folder', label: 'MySpace', icon: 'myspace' },
-  { id: 'rct', type: 'video-game', label: 'RollerCoaster Tycoon', icon: 'rct' },
+  { id: 'rct', type: 'video-game', label: 'RollerCoaster Tycoon', icon: 'rct', video: 'assets/video/rct-loading.mp4' },
+  { id: 'starcraft', type: 'video-game', label: 'StarCraft', icon: 'starcraft', video: 'assets/video/starcraft-loading.mp4' },
   { id: 'limewire', type: 'easter-egg', label: 'LimeWire', icon: 'limewire' },
   { id: 'linkedin', type: 'social', label: 'LinkedIn', icon: 'linkedin', url: 'https://www.linkedin.com/in/nicholasprijic/', shortcut: true },
   { id: 'twitter', type: 'social', label: 'X', icon: 'twitter', url: 'https://x.com/NickPrijic', shortcut: true },
@@ -236,7 +277,7 @@ function openRCTVideoWindow(icon) {
       preload="none"
       loop
       playsinline
-      src="assets/video/rct-loading.mp4"
+      src="${icon.video}"
     ></video>
   `;
 
@@ -268,10 +309,40 @@ function openRCTVideoWindow(icon) {
   updateTaskbar();
 
   // Play — user click satisfies autoplay policy
+  startVideoFromTap(video, container);
+}
+
+// Called synchronously from the click/tap handler so mobile browsers treat
+// play() as user-initiated. Unmuted, playsinline. If play() still rejects
+// (iOS Low Power Mode, data saver, etc.) show a Win98 tap-to-play button.
+function startVideoFromTap(video, container) {
+  video.muted = false;
+  video.playsInline = true;
+  video.setAttribute('playsinline', '');
+  video.setAttribute('webkit-playsinline', '');
   video.volume = 0.08;
-  video.play().catch(err => {
-    console.warn('RCT video playback failed:', err);
+  const p = video.play();
+  if (p && typeof p.catch === 'function') {
+    p.catch(err => {
+      console.warn('Video playback failed:', err);
+      showTapToPlay(video, container);
+    });
+  }
+}
+
+function showTapToPlay(video, container) {
+  if (container.querySelector('.video-tap-to-play')) return;
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'video-tap-to-play';
+  btn.textContent = '\u25B6 Tap to play';
+  btn.addEventListener('click', () => {
+    video.muted = false;
+    video.play().then(() => btn.remove()).catch(err => {
+      console.warn('Video playback failed again:', err);
+    });
   });
+  container.appendChild(btn);
 }
 
 function openRCTMobileView(icon) {
@@ -289,7 +360,7 @@ function openRCTMobileView(icon) {
         preload="none"
         loop
         playsinline
-        src="assets/video/rct-loading.mp4"
+        src="${icon.video}"
       ></video>
     </div>
   `;
@@ -297,10 +368,7 @@ function openRCTMobileView(icon) {
   mobileView.classList.add('active');
 
   const video = mobileContent.querySelector('video');
-  video.volume = 0.08;
-  video.play().catch(err => {
-    console.warn('RCT video playback failed:', err);
-  });
+  startVideoFromTap(video, mobileContent.querySelector('.rct-video-container'));
 }
 
 // LimeWire easter egg - fake virus sequence
