@@ -113,6 +113,7 @@ const pngIcons = {
   thoughts: 'assets/icons/windows98-icons/png/notepad-0.png',
   myspace: 'assets/icons/windows98-icons/png/user_card.png',
   rct: 'assets/icons/RCT.ico',
+  starcraft: 'assets/icons/StarCraft.png',
   limewire: 'assets/icons/LimeWire.jpeg',
   github: 'assets/icons/windows98-icons/png/html-0.png',
   linkedin: 'assets/icons/windows98-icons/png/html-0.png',
@@ -123,7 +124,8 @@ const pngIcons = {
 const icons = [
   { id: 'thoughts', type: 'folder', label: 'Thoughts', icon: 'thoughts' },
   { id: 'myspace', type: 'folder', label: 'MySpace', icon: 'myspace' },
-  { id: 'rct', type: 'video-game', label: 'RollerCoaster Tycoon', icon: 'rct' },
+  { id: 'rct', type: 'video-game', label: 'RollerCoaster Tycoon', icon: 'rct', video: 'assets/video/rct-loading.mp4' },
+  { id: 'starcraft', type: 'video-game', label: 'StarCraft', icon: 'starcraft', video: 'assets/video/starcraft-loading.mp4' },
   { id: 'limewire', type: 'easter-egg', label: 'LimeWire', icon: 'limewire' },
   { id: 'linkedin', type: 'social', label: 'LinkedIn', icon: 'linkedin', url: 'https://www.linkedin.com/in/nicholasprijic/', shortcut: true },
   { id: 'twitter', type: 'social', label: 'X', icon: 'twitter', url: 'https://x.com/NickPrijic', shortcut: true },
@@ -226,7 +228,7 @@ function openRCTVideoWindow(icon) {
 
   const offset = (openWindows.size % 5) * 30;
   const iconSvg = svgIcons[icon.icon];
-  const iconDataUri = iconSvg ? svgToDataUri(iconSvg) : null;
+  const iconDataUri = iconSvg ? svgToDataUri(iconSvg) : (pngIcons[icon.icon] || null);
 
   const container = document.createElement('div');
   container.className = 'rct-video-container';
@@ -236,7 +238,7 @@ function openRCTVideoWindow(icon) {
       preload="none"
       loop
       playsinline
-      src="assets/video/rct-loading.mp4"
+      src="${icon.video}"
     ></video>
   `;
 
@@ -268,10 +270,40 @@ function openRCTVideoWindow(icon) {
   updateTaskbar();
 
   // Play — user click satisfies autoplay policy
+  startVideoFromTap(video, container);
+}
+
+// Called synchronously from the click/tap handler so mobile browsers treat
+// play() as user-initiated. Unmuted, playsinline. If play() still rejects
+// (iOS Low Power Mode, data saver, etc.) show a Win98 tap-to-play button.
+function startVideoFromTap(video, container) {
+  video.muted = false;
+  video.playsInline = true;
+  video.setAttribute('playsinline', '');
+  video.setAttribute('webkit-playsinline', '');
   video.volume = 0.08;
-  video.play().catch(err => {
-    console.warn('RCT video playback failed:', err);
+  const p = video.play();
+  if (p && typeof p.catch === 'function') {
+    p.catch(err => {
+      console.warn('Video playback failed:', err);
+      showTapToPlay(video, container);
+    });
+  }
+}
+
+function showTapToPlay(video, container) {
+  if (container.querySelector('.video-tap-to-play')) return;
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'video-tap-to-play';
+  btn.textContent = '\u25B6 Tap to play';
+  btn.addEventListener('click', () => {
+    video.muted = false;
+    video.play().then(() => btn.remove()).catch(err => {
+      console.warn('Video playback failed again:', err);
+    });
   });
+  container.appendChild(btn);
 }
 
 function openRCTMobileView(icon) {
@@ -289,18 +321,15 @@ function openRCTMobileView(icon) {
         preload="none"
         loop
         playsinline
-        src="assets/video/rct-loading.mp4"
+        src="${icon.video}"
       ></video>
     </div>
   `;
 
-  mobileView.classList.add('active');
+  mobileView.classList.add('active', 'video-mode');
 
   const video = mobileContent.querySelector('video');
-  video.volume = 0.08;
-  video.play().catch(err => {
-    console.warn('RCT video playback failed:', err);
-  });
+  startVideoFromTap(video, mobileContent.querySelector('.rct-video-container'));
 }
 
 // LimeWire easter egg - fake virus sequence
@@ -616,6 +645,7 @@ function openMobileView(icon) {
   contentEl.className = 'window-content';
   mobileContent.innerHTML = '';
   mobileContent.appendChild(contentEl);
+  mobileView.classList.remove('video-mode');
 
   // Load content
   loadMobileContent(contentEl, icon.id);
@@ -633,7 +663,7 @@ function closeMobileView() {
     video.removeAttribute('src');
     video.load();
   }
-  mobileView.classList.remove('active');
+  mobileView.classList.remove('active', 'video-mode');
   currentMobileView = null;
   window.location.hash = '';
 }
