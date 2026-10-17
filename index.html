@@ -80,6 +80,12 @@
     <div class="menu-item" data-action="source">
       <span class="menu-icon">💻</span> View Source
     </div>
+    <div class="menu-item" data-action="x">
+      <span class="menu-icon">𝕏</span> X (Twitter)
+    </div>
+    <div class="menu-item" data-action="linkedin">
+      <span class="menu-icon">in</span> LinkedIn
+    </div>
     <div class="menu-divider"></div>
     <div class="menu-item" data-action="shutdown">
       <span class="menu-icon">🔌</span> Shut Down...
@@ -95,9 +101,11 @@
 
   <!-- Mobile full-screen view -->
   <div id="mobile-view">
-    <div id="mobile-header">
-      <button id="mobile-back-btn" aria-label="Go back">←</button>
-      <span id="mobile-title">Title</span>
+    <div id="mobile-header" class="title-bar">
+      <div class="title-bar-text" id="mobile-title">Title</div>
+      <div class="title-bar-controls">
+        <button id="mobile-back-btn" aria-label="Close"></button>
+      </div>
     </div>
     <div id="mobile-content"></div>
   </div>
