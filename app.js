@@ -56,46 +56,6 @@ const svgIcons = {
     <rect x="34" y="24" width="4" height="16" fill="#795548"/>
   </svg>`,
 
-  // StarCraft icon: pixel art of the 1998 main menu (planet, star, green cursor)
-  starcraft: `<svg viewBox="0 0 16 16" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
-    <rect x="0" y="0" width="16" height="16" fill="#05050f"/>
-    <rect x="2" y="1" width="1" height="1" fill="#ffffff"/>
-    <rect x="12" y="1" width="1" height="1" fill="#ffffff"/>
-    <rect x="7" y="2" width="2" height="1" fill="#8b1a1a"/>
-    <rect x="6" y="3" width="1" height="1" fill="#8b1a1a"/>
-    <rect x="7" y="3" width="1" height="1" fill="#ff9a2e"/>
-    <rect x="8" y="3" width="1" height="1" fill="#8b1a1a"/>
-    <rect x="14" y="3" width="1" height="1" fill="#ffffff"/>
-    <rect x="1" y="4" width="1" height="1" fill="#ffffff"/>
-    <rect x="7" y="4" width="2" height="1" fill="#8b1a1a"/>
-    <rect x="5" y="6" width="1" height="1" fill="#3cd04a"/>
-    <rect x="5" y="7" width="2" height="1" fill="#3cd04a"/>
-    <rect x="11" y="7" width="1" height="1" fill="#ffffff"/>
-    <rect x="5" y="8" width="1" height="1" fill="#3cd04a"/>
-    <rect x="6" y="8" width="1" height="1" fill="#0f4d14"/>
-    <rect x="7" y="8" width="1" height="1" fill="#3cd04a"/>
-    <rect x="5" y="9" width="1" height="1" fill="#3cd04a"/>
-    <rect x="6" y="9" width="2" height="1" fill="#0f4d14"/>
-    <rect x="8" y="9" width="1" height="1" fill="#3cd04a"/>
-    <rect x="5" y="10" width="1" height="1" fill="#3cd04a"/>
-    <rect x="6" y="10" width="1" height="1" fill="#0f4d14"/>
-    <rect x="7" y="10" width="3" height="1" fill="#3cd04a"/>
-    <rect x="2" y="11" width="3" height="1" fill="#1d4f9c"/>
-    <rect x="5" y="11" width="2" height="1" fill="#3cd04a"/>
-    <rect x="1" y="12" width="2" height="1" fill="#1d4f9c"/>
-    <rect x="3" y="12" width="2" height="1" fill="#6fa8e8"/>
-    <rect x="5" y="12" width="1" height="1" fill="#1d4f9c"/>
-    <rect x="6" y="12" width="1" height="1" fill="#3cd04a"/>
-    <rect x="0" y="13" width="2" height="1" fill="#1d4f9c"/>
-    <rect x="2" y="13" width="2" height="1" fill="#6fa8e8"/>
-    <rect x="4" y="13" width="5" height="1" fill="#1d4f9c"/>
-    <rect x="0" y="14" width="1" height="1" fill="#1d4f9c"/>
-    <rect x="1" y="14" width="2" height="1" fill="#6fa8e8"/>
-    <rect x="3" y="14" width="9" height="1" fill="#1d4f9c"/>
-    <rect x="0" y="15" width="1" height="1" fill="#6fa8e8"/>
-    <rect x="1" y="15" width="14" height="1" fill="#1d4f9c"/>
-  </svg>`,
-
   // Windows 98 4-color flag logo for Start button
   windowsLogo: `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="1" y="1" width="6" height="6" fill="#FF0000"/>
@@ -153,6 +113,7 @@ const pngIcons = {
   thoughts: 'assets/icons/windows98-icons/png/notepad-0.png',
   myspace: 'assets/icons/windows98-icons/png/user_card.png',
   rct: 'assets/icons/RCT.ico',
+  starcraft: 'assets/icons/StarCraft.png',
   limewire: 'assets/icons/LimeWire.jpeg',
   github: 'assets/icons/windows98-icons/png/html-0.png',
   linkedin: 'assets/icons/windows98-icons/png/html-0.png',
@@ -267,7 +228,7 @@ function openRCTVideoWindow(icon) {
 
   const offset = (openWindows.size % 5) * 30;
   const iconSvg = svgIcons[icon.icon];
-  const iconDataUri = iconSvg ? svgToDataUri(iconSvg) : null;
+  const iconDataUri = iconSvg ? svgToDataUri(iconSvg) : (pngIcons[icon.icon] || null);
 
   const container = document.createElement('div');
   container.className = 'rct-video-container';

@@ -51,6 +51,11 @@ button.desktop-icon:active {
   margin: 0 auto 4px;
 }
 
+/* Original 32x32 StarCraft icon: keep pixels sharp when scaled on high-DPI screens */
+img[src$="StarCraft.png"] {
+  image-rendering: pixelated;
+}
+
 .desktop-icon span {
   color: white;
   text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black;
