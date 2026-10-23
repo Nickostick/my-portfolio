@@ -1240,7 +1240,7 @@ function handleStartMenuAction(action) {
       window.open('https://www.linkedin.com/in/nicholasprijic/', '_blank', 'noopener');
       break;
     case 'source':
-      window.open('https://github.com/Nickostick/my-portfolio', '_blank', 'noopener');
+      window.open('https://github.com/NickPrijic/my-portfolio', '_blank', 'noopener');
       break;
     case 'shutdown':
       alert('Thanks for visiting! 👋');
@@ -1301,7 +1301,7 @@ function initQuickLaunch() {
     githubBtn.innerHTML = svgIcons.github;
     githubBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      window.open('https://github.com/Nickostick', '_blank', 'noopener');
+      window.open('https://github.com/NickPrijic', '_blank', 'noopener');
     });
   }
 
